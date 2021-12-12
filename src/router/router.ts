@@ -7,6 +7,11 @@ const Router = createRouter({
   history: createWebHistory(),
   routes: [
     {
+      path: '/',
+      name: 'redecit',
+      component: Login
+    },
+    {
       path: '/home',
       name: 'home',
       component: home

@@ -2,6 +2,7 @@
   <div class="login-bg">
     <el-form
       :model="form"
+      ref="loginFormRef"
       class="login-form"
       :rules="rules"
       label-position="right"
