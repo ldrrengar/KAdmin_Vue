@@ -8,11 +8,31 @@
     "sourceMap": true, // 生成目标文件的sourceMap文件
     "resolveJsonModule": true, // 包含导入的模块。json的扩展。
     "esModuleInterop": true, //  为运行时babel生态系统兼容性提供“……importstar”和“……importdefault”帮助，并为类型系统兼容性启用“——allowSyntheticDefaultImports”。
-    "lib": ["esnext", "dom"], // 用来指定项目所用的库
-    "types": ["vite/client", "node"] // 加载的声明文件包
+    "lib": [
+      "esnext",
+      "dom"
+    ], // 用来指定项目所用的库
+    "types": [
+      "vite/client",
+      "node"
+    ], // 加载的声明文件包"paths": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
   },
   /*include用来指定哪些文件需要编译*/
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],   // ** 表示任意目录  *表示任意文件
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
+  ], // ** 表示任意目录  *表示任意文件
   // exclude指定不需要编译的文件
-  "exclude": ["node_modules", "dist"]
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

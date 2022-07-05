@@ -10,7 +10,7 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.0-beta.0",
     "@types/js-cookie": "^3.0.1",
-    "@types/node": "^15.0.3",
+    "@types/node": "^18.0.0",
     "element-plus": "^2.2.2",
     "js-cookie": "^3.0.1",
     "save": "^2.4.0",
