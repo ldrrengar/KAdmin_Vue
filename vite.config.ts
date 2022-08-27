@@ -15,5 +15,5 @@ export default defineConfig({
        // 如果报错__dirname找不到，需要安装node,执行yarn add @types/node --save-dev
       '@': path.resolve(__dirname, "src")
     }
-  }
+  },
 })
