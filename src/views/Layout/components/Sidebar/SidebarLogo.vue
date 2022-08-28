@@ -55,7 +55,7 @@ export default defineComponent({
   width: 100%;
   height: 50px;
   line-height: 50px;
-  // background: $menuBg;
+  background: $menuBg;
   background: #4cade1;
   text-align: center;
   overflow: hidden;

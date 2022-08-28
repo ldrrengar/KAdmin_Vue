@@ -35,7 +35,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-$sideBarWidth:300px;
 .app-wrapper {
   // @include clearfix;
   position: relative;
