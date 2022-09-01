@@ -30,8 +30,8 @@ export default defineConfig({
       // 导入scss预编译程序
       scss: {
         // 两种方法都行
-        additionalData: `@import "src/style/index.scss";`
-        // additionalData: `@use "src/style/index.scss";`
+        additionalData: '@import "src/styles/index.scss";'
+        // additionalData: `@use "src/styles/index.scss";`
       }
     }
   }
