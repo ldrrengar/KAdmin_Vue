@@ -29,9 +29,14 @@ export const defaultRoutes: RouteRecordRaw[] = [
   }
 ]
 // createWebHistory 是history模式  createWebHashHistory是hash模式
-const Router = createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes: [...defaultRoutes],
 })
 
-export default Router
+export function resetRouter() {
+  const newRouter = router;
+  (router as any).matcher = (newRouter as any).matcher // reset router
+}
+
+export default router

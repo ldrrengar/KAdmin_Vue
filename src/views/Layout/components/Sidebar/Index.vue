@@ -8,8 +8,7 @@
       v-if="showLogo"
       :collapse="isCollapse"
     />
-    <el-scrollbar wrap-class="scrollbar-wrapper">
-    
+    <el-scrollbar wrap-class="scrollbar-wrapper">    
     </el-scrollbar>
   </div>
 </template>

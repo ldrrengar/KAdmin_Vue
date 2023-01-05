@@ -15,7 +15,7 @@
         <template v-if="device !== 'mobile'">
           <Screenfull class="right-menu-item hover-effect" />
           <el-tooltip
-            :content="t('navbar.size')"
+            content="布局大小"
             effect="dark"
             placement="bottom"
           >
@@ -37,34 +37,20 @@
             <el-dropdown-menu>
               <router-link to="/profile/">
                 <el-dropdown-item>
-                  {{ t("navbar.profile") }}
+                 个人中心
                 </el-dropdown-item>
               </router-link>
               <router-link to="/">
                 <el-dropdown-item>
-                  {{ t("navbar.dashboard") }}
+                 首页
                 </el-dropdown-item>
               </router-link>
-              <a
-                target="_blank"
-                href="https://github.com/rcyj-FED/vue3-composition-admin"
-              >
-                <el-dropdown-item>
-                  {{ t("navbar.github") }}
-                </el-dropdown-item>
-              </a>
-              <a
-                target="_blank"
-                href="https://armour.github.io/vue-typescript-admin-docs/"
-              >
-                <el-dropdown-item>Docs</el-dropdown-item>
-              </a>
               <el-dropdown-item
                 divided
                 @click="logout"
               >
                 <span style="display:block;">
-                  {{ t("navbar.logOut") }}
+                  退出登录
                 </span>
               </el-dropdown-item>
             </el-dropdown-menu>
@@ -78,13 +64,10 @@
   import BreadCrumb from '@/components/BreadCrumb/BreadCrumb.vue'
   import Hamburger from '@/components/Hamburger/Hamburger.vue'
   import Screenfull from '@/components/ScreenFull/ScreenFull.vue'
-  import LangSelect from '@/components/LangSelect/LangSelect.vue'
   import SizeSelect from '@/components/SizeSelect/SizeSelect.vue'
-  
   import { computed, reactive, toRefs } from 'vue'
   import { useStore } from '@/store'
   import { AppActionTypes } from '@/store/modules/app/action-types'
-  import { useI18n } from 'vue-i18n'
   import { UserActionTypes } from '@/store/modules/user/action-types'
   import { useRoute, useRouter } from 'vue-router'
   export default {
@@ -92,14 +75,12 @@
       BreadCrumb,
       Hamburger,
       Screenfull,
-      LangSelect,
       SizeSelect
     },
     setup() {
       const store = useStore()
       const route = useRoute()
       const router = useRouter()
-      const { t } = useI18n()
       const sidebar = computed(() => {
         return store.state.app.sidebar
       })
@@ -124,8 +105,7 @@
         sidebar,
         device,
         avatar,
-        ...toRefs(state),
-        t
+        ...toRefs(state)
       }
     }
   }

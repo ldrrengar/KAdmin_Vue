@@ -11,7 +11,7 @@ import {
     getRefreshToken,
     setRefreshToken,
     removeToken
-} from './cookie'
+} from './cookies'
 
 export class Interceptors {
 

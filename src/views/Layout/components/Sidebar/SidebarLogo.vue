@@ -14,7 +14,8 @@
           :src="Logo"
         >
         <h1 class="sidebar-title">
-          Vue<span style="color:#57CAEB">3</span>管理后台
+          <!-- Vue<span style="color:#57CAEB">3</span>管理后台 -->
+          KAdmin
         </h1>
       </router-link>
     </transition>
