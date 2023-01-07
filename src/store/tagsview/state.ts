@@ -8,14 +8,3 @@ export interface TagsViewState {
   visitedViews: TagView[]
   cachedViews: (string | undefined)[]
 }
-
-export const state = ():TagsViewState => {
-    return {
-        visitedViews: [],
-        cachedViews: []
-    }
-}
-// export const state: TagsViewState = {
-//   visitedViews: [],
-//   cachedViews: []
-// }

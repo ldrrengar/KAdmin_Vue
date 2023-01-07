@@ -34,19 +34,22 @@
   </template>
   
   <script lang="ts">
-  import { useStore } from '@/store'
-  import { AppActionTypes } from '@/store/modules/app/action-types'
-  import { TagsActionTypes } from '@/store/modules/tag/action-types'
+  import { app } from '@/store/app/app'
+  import { tagsView } from '@/store/tagsview/tagsView'
+  import { appTypes } from '@/store/app/actions'
+  import { tagsViewTypes } from '@/store/tagsview/actions'
   import { defineComponent, reactive, nextTick, toRefs, computed } from 'vue'
   import { ElMessage } from 'element-plus'
   import { useRoute, useRouter } from 'vue-router'
   
   export default defineComponent({
     setup() {
+      const appStore = app()
+      const tagsStore = tagsView()
       const { fullPath } = useRoute()
       const router = useRouter()
       function refreshView() {
-        useStore().dispatch(TagsActionTypes.ACTION_DEL_ALL_CACHED_VIEWS, undefined)
+        tagsStore[tagsViewTypes.DEL_ALL_CACHED_VIEWS]()
         nextTick(() => {
           router.replace({ path: '/redirect' + fullPath }).catch((err) => {
             console.warn(err)
@@ -61,13 +64,14 @@
           { label: 'Mini', value: 'mini' }
         ],
         handleSetSize: (size: string) => {
-          useStore().dispatch(AppActionTypes.ACTION_SET_SIZE, size)
+          appStore[appTypes.SET_SIZE](size)
           refreshView()
           ElMessage.success('Switch Size Success')
         }
       })
       const size = computed(() => {
-        return useStore().state.app.size
+        // return useStore().state.app.size
+        return appStore.size
       })
       return {
         ...toRefs(state),
