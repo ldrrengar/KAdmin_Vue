@@ -21,17 +21,17 @@
           >
             <SizeSelect class="right-menu-item hover-effect" />
           </el-tooltip>
-          <LangSelect class="right-menu-item hover-effect" />
+          <!-- <LangSelect class="right-menu-item hover-effect" /> -->
         </template>
         <el-dropdown
           class="avatar-container right-menu-item hover-effect"
           trigger="click"
         >
           <div class="avatar-wrapper">
-            <img
+            <!-- <img
               :src="avatar + '?imageView2/1/w/80/h/80'"
               class="user-avatar"
-            >
+            > -->
           </div>
           <template #dropdown>
             <el-dropdown-menu>
@@ -60,15 +60,14 @@
     </div>
   </template>
   
-  <script>
+  <script lang="ts">
   import BreadCrumb from '@/components/BreadCrumb/BreadCrumb.vue'
   import Hamburger from '@/components/Hamburger/Hamburger.vue'
   import Screenfull from '@/components/ScreenFull/ScreenFull.vue'
   import SizeSelect from '@/components/SizeSelect/SizeSelect.vue'
   import { computed, reactive, toRefs } from 'vue'
-  import { useStore } from '@/store'
-  import { AppActionTypes } from '@/store/modules/app/action-types'
-  import { UserActionTypes } from '@/store/modules/user/action-types'
+  import { app } from '@/store/app'
+  import { user } from '@/store/user'
   import { useRoute, useRouter } from 'vue-router'
   export default {
     components: {
@@ -78,24 +77,25 @@
       SizeSelect
     },
     setup() {
-      const store = useStore()
+      const appStore = app()
+      const userStore = user()
       const route = useRoute()
       const router = useRouter()
       const sidebar = computed(() => {
-        return store.state.app.sidebar
+        return appStore.sidebar
       })
       const device = computed(() => {
-        return store.state.app.device.toString()
+        return appStore.device.toString()
       })
       const avatar = computed(() => {
-        return store.state.user.avatar
+        return userStore.avatar
       })
       const state = reactive({
         toggleSideBar: () => {
-          store.dispatch(AppActionTypes.ACTION_TOGGLE_SIDEBAR, false)
+          appStore.toggleSidebar(false)
         },
         logout: () => {
-          useStore().dispatch(UserActionTypes.ACTION_LOGIN_OUT)
+            userStore.resetToken()
           router.push(`/login?redirect=${route.fullPath}`).catch(err => {
             console.warn(err)
           })

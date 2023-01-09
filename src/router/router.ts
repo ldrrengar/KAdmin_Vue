@@ -7,7 +7,14 @@ export const defaultRoutes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'redecit',
-    component: Login
+    component: Layout,
+    meta: { hidden: true },
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/views/redirect/index.vue')
+      }
+    ]
   },
   {
     path: '/home',
@@ -15,9 +22,9 @@ export const defaultRoutes: RouteRecordRaw[] = [
     component: Layout,
     children: [
       {
-        path: 'index',
+        path: 'home',
         component: () => import('@/views/Home/Home.vue'),
-        name: 'index',
+        name: 'home',
         meta: { title: 'index' }
       }
     ]

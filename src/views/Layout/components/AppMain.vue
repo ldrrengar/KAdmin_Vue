@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { tagsView } from '@/store/tagsview/tagsView'
+import { tagsView } from '@/store/tagsview'
 import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 

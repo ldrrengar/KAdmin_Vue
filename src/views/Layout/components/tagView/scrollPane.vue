@@ -61,16 +61,16 @@ const moveToCurrentTag = (currentTag: HTMLElement) => {
   }
 };
 const emit = defineEmits<{ (e: "scroll"): void }>();
+console.log(emit)
 const emitScroll = () => {
   emit("scroll");
 };
-
 onMounted(() => {
-  scrollWrapper.value.addEventListener("scroll", emitScroll, true);
+  // scrollWrapper.value.addEventListener("scroll", emitScroll, true);
 });
 
 onBeforeUnmount(() => {
-  scrollWrapper.value.removeEventListener("scroll", emitScroll);
+  // scrollWrapper.value.removeEventListener("scroll", emitScroll);
 });
 </script>
 <style lang="scss" scoped>

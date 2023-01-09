@@ -34,10 +34,8 @@
   </template>
   
   <script lang="ts">
-  import { app } from '@/store/app/app'
-  import { tagsView } from '@/store/tagsview/tagsView'
-  import { appTypes } from '@/store/app/actions'
-  import { tagsViewTypes } from '@/store/tagsview/actions'
+  import { app } from '@/store/app'
+  import { tagsView } from '@/store/tagsview'
   import { defineComponent, reactive, nextTick, toRefs, computed } from 'vue'
   import { ElMessage } from 'element-plus'
   import { useRoute, useRouter } from 'vue-router'
@@ -49,7 +47,7 @@
       const { fullPath } = useRoute()
       const router = useRouter()
       function refreshView() {
-        tagsStore[tagsViewTypes.DEL_ALL_CACHED_VIEWS]()
+        tagsStore.delAllCachedViews()
         nextTick(() => {
           router.replace({ path: '/redirect' + fullPath }).catch((err) => {
             console.warn(err)
@@ -64,7 +62,7 @@
           { label: 'Mini', value: 'mini' }
         ],
         handleSetSize: (size: string) => {
-          appStore[appTypes.SET_SIZE](size)
+          appStore.setSize(size)
           refreshView()
           ElMessage.success('Switch Size Success')
         }

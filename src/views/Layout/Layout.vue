@@ -4,7 +4,7 @@
 <template>
   <div  class="app-wrapper">
    <Sidebar class="sidebar-container" />
-    <!-- <div
+    <div
       :class="{hasTagsView: showTagsView}"
       class="main-container"
     >
@@ -13,27 +13,81 @@
         <TagsView v-if="showTagsView" />
       </div>
       <AppMain />
-      <RightPanel v-if="showSettings">
+      <!-- <RightPanel v-if="showSettings">
         <Settings />
-      </RightPanel>
-    </div> -->
+      </RightPanel> -->
+    </div>
   </div>
 </template>
-
 <script lang="ts">
 import { computed, defineComponent, onBeforeMount, onBeforeUnmount, onMounted, reactive, toRefs } from 'vue'
-import {  Sidebar } from './components'
+import { app, deviceType } from '@/store/app'
+import { settings } from '@/store/settings'
+import { AppMain, Navbar, TagsView, Sidebar } from './components'
+// import RightPanel from '@/components/right_panel/Index.vue'
+import resize from './resize'
 export default defineComponent({
   name: 'Layout',
   components: {
+    AppMain,
+    Navbar,
+    // RightPanel,
+    // Settings,
     Sidebar,
+    TagsView
   },
   setup() {
-    return {}
+    const appStore = app()
+    const settingsStore = settings()
+    const { sidebar, device, addEventListenerOnResize, resizeMounted, removeEventListenerResize, watchRouter } = resize()
+    const state = reactive({
+      handleClickOutside: () => {
+        appStore.closeSidebar(false)
+      }
+    })
+
+    const classObj = computed(() => {
+      return {
+        hideSidebar: !sidebar.value.opened,
+        openSidebar: sidebar.value.opened,
+        withoutAnimation: sidebar.value.withoutAnimation,
+        mobile: device.value === deviceType.Mobile
+      }
+    })
+
+    const showSettings = computed(() => {
+      return settingsStore.showSettings
+    })
+    const showTagsView = computed(() => {
+      return settingsStore.showTagsView
+    })
+    const fixedHeader = computed(() => {
+      return settingsStore.fixedHeader
+    })
+
+    watchRouter()
+    onBeforeMount(() => {
+      addEventListenerOnResize()
+    })
+
+    onMounted(() => {
+      resizeMounted()
+    })
+
+    onBeforeUnmount(() => {
+      removeEventListenerResize()
+    })
+    return {
+      classObj,
+      sidebar,
+      showSettings,
+      showTagsView,
+      fixedHeader,
+      ...toRefs(state)
+    }
   }
 })
 </script>
-
 <style lang="scss" scoped>
 .app-wrapper {
   @include clearfix;
