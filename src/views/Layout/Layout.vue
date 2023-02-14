@@ -2,20 +2,18 @@
  app 布局入口
 -->
 <template>
-  <div  class="app-wrapper">
-   <Sidebar class="sidebar-container" />
-    <div
-      :class="{hasTagsView: showTagsView}"
-      class="main-container"
-    >
-      <div :class="{'fixed-header': fixedHeader}">
+  <div class="app-wrapper">
+    <div v-if="classObj.mobile && sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
+    <Sidebar class="sidebar-container" />
+    <div :class="{ hasTagsView: showTagsView }" class="main-container">
+      <div :class="{ 'fixed-header': fixedHeader }">
         <Navbar />
         <TagsView v-if="showTagsView" />
       </div>
       <AppMain />
-      <!-- <RightPanel v-if="showSettings">
-        <Settings />
-      </RightPanel> -->
+      <RightPanel v-if="showSettings">
+        <!-- <Settings /> -->
+      </RightPanel>
     </div>
   </div>
 </template>
@@ -180,6 +178,7 @@ export default defineComponent({
 }
 
 .withoutAnimation {
+
   .main-container,
   .sidebar-container {
     transition: none;
