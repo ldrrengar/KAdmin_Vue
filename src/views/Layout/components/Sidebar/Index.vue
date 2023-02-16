@@ -13,8 +13,8 @@
         :collapse="!isCollapse"
         :unique-opened="false"
         :default-active="activeMenu"
-        :background-color="variables.menuBg"
-        :text-color="variables.menuText"
+        background-color="#fff"
+        text-color="#162B64"
         :active-text-color="menuActiveTextColor"
         mode="vertical"
       >
@@ -66,7 +66,8 @@ export default defineComponent({
       if (settingsStore.sidebarTextTheme) {
         return '#57CAEB'
       } else {
-        return variables.menuActiveText
+        // return variables.menuActiveText
+        return '#435EBE'
       }
     })
 
@@ -89,7 +90,7 @@ export default defineComponent({
       routes,
       showLogo,
       menuActiveTextColor,
-      variables,
+      // variables,
       activeMenu,
       isCollapse
     }
