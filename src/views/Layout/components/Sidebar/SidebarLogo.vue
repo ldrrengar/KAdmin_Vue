@@ -14,8 +14,7 @@
           :src="Logo"
         >
         <h1 class="sidebar-title">
-          <!-- Vue<span style="color:#57CAEB">3</span>管理后台 -->
-          KAdmin
+          {{title}}
         </h1>
       </router-link>
     </transition>
@@ -25,6 +24,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Logo from '@/assets/logo.png'
+import settings from '@/config/default/setting.config'
 export default defineComponent({
   props: {
     collapse: {
@@ -33,9 +33,9 @@ export default defineComponent({
     }
   },
   setup() {
-    // const title = settings.title
+    const title = settings.title
     return {
-    //   title,
+      title,
       Logo
     }
   }

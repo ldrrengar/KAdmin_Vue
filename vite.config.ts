@@ -16,15 +16,6 @@ export default defineConfig({
       '@': path.resolve(__dirname, "src")
     }
   },
-  // pluginOptions: {
-  //   'style-resources-loader': {
-  //     preProcessor: 'scss',
-  //     patterns: [
-  //       path.resolve(__dirname, 'src/styles/_variables.scss'),
-  //       path.resolve(__dirname, 'src/styles/_mixins.scss'),
-  //     ]
-  //   }
-  // }
   css: {
     preprocessorOptions: {
       // 导入scss预编译程序
@@ -34,5 +25,8 @@ export default defineConfig({
         // additionalData: `@use "src/styles/index.scss";`
       }
     }
+  },
+  define:{
+   "process.env":{}
   }
 })

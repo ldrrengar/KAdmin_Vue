@@ -9,32 +9,89 @@
       :collapse="isCollapse"
     />
     <el-scrollbar wrap-class="scrollbar-wrapper">    
+      <el-menu
+        :collapse="!isCollapse"
+        :unique-opened="false"
+        :default-active="activeMenu"
+        :background-color="variables.menuBg"
+        :text-color="variables.menuText"
+        :active-text-color="menuActiveTextColor"
+        mode="vertical"
+      >
+        <SidebarItem
+          v-for="route in routes"
+          :key="route.path"
+          :item="route"
+          :base-path="route.path"
+          :is-collapse="isCollapse"
+        />
+      </el-menu>
     </el-scrollbar>
   </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-// import SidebarItem from './SidebarItem.vue'
+import SidebarItem from './SidebarItem.vue'
 import SidebarLogo from './SidebarLogo.vue'
+import { useRoute } from 'vue-router'
+// import variables from '@/styles/variables.scss' 
+import { app } from '@/store/app'
+import { permission } from '@/store/permission'
+import { settings } from '@/store/settings'
 
 export default defineComponent({
   components: {
-    // SidebarItem,
+    SidebarItem,
     SidebarLogo
   },
   setup() {
-//    const showLogo = computed(() => {
-//       return store.state.settings.showSidebarLogo
-//     })
-//      const isCollapse = computed(() => {
-//       return sidebar.value.opened
-//     })
-    const showLogo = true
-    const isCollapse = true
+    const appStore = app()
+    const permissionStore = permission()
+    const settingsStore = settings()
+    const route = useRoute()
+    const sidebar = computed(() => {
+      return appStore.sidebar
+    })
+    const routes = computed(() => {
+      return permissionStore.routes
+    })
+    const showLogo = computed(() => {
+      return settingsStore.showSidebarLogo
+    })
+
+    const menuActiveTextColor = computed(() => {
+      console.log(settingsStore.sidebarTextTheme)
+
+      if (settingsStore.sidebarTextTheme) {
+        return '#57CAEB'
+      } else {
+        return variables.menuActiveText
+      }
+    })
+
+    const activeMenu = computed(() => {
+      const { meta, path } = route
+      if (meta !== null || meta !== undefined) {
+        if (meta.activeMenu) {
+          return meta.activeMenu
+        }
+      }
+      return path
+    })
+
+    const isCollapse = computed(() => {
+      return sidebar.value.opened
+    })
+
     return {
-     showLogo,
-     isCollapse
+      sidebar,
+      routes,
+      showLogo,
+      menuActiveTextColor,
+      variables,
+      activeMenu,
+      isCollapse
     }
   }
 })
