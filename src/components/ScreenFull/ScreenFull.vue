@@ -1,22 +1,22 @@
 <!-- 全屏按钮 -->
 <template>
-  <div id="screenfull">
-    <div v-if="isFullscreen" @click="click">
-      <svg class="icon" aria-hidden="true" font-size="40px">
-        <use xlink:href="#iconshiliangzhinengduixiang1" />
-      </svg>
+   <div v-if="isFullscreen" @click="click">
+      <el-icon :size="22"><FullScreen /></el-icon>
+      <!-- <svg class="icon" aria-hidden="true" font-size="20px">
+        <use xlink:href="#icon-quanping" />
+      </svg>     -->
     </div>
     <div @click="click" v-else>
-      <svg class="icon" aria-hidden="true" font-size="40px">
-        <use xlink:href="#iconshiliangzhinengduixiang1" />
-      </svg>
+      <el-icon :size="22"><FullScreen /></el-icon>
+      <!-- <svg class="icon" aria-hidden="true" font-size="20px">
+        <use xlink:href="#icon-quanping" />
+      </svg> -->
     </div>
-  </div>
 </template>
   
-  <script lang="ts" setup>
+<script lang="ts" setup>
 import screenfull from "screenfull";
-import { onBeforeUnmount, onMounted, reactive, toRefs } from "vue";
+import { onBeforeUnmount, onMounted} from "vue";
 import { ElMessage } from "element-plus";
 
 const sf = screenfull;

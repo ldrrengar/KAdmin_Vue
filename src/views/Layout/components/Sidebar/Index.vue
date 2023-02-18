@@ -35,7 +35,6 @@ import { computed, defineComponent } from 'vue'
 import SidebarItem from './SidebarItem.vue'
 import SidebarLogo from './SidebarLogo.vue'
 import { useRoute } from 'vue-router'
-// import variables from '@/styles/variables.scss' 
 import { app } from '@/store/app'
 import { permission } from '@/store/permission'
 import { settings } from '@/store/settings'
@@ -66,7 +65,6 @@ export default defineComponent({
       if (settingsStore.sidebarTextTheme) {
         return '#57CAEB'
       } else {
-        // return variables.menuActiveText
         return '#435EBE'
       }
     })
@@ -90,7 +88,6 @@ export default defineComponent({
       routes,
       showLogo,
       menuActiveTextColor,
-      // variables,
       activeMenu,
       isCollapse
     }
