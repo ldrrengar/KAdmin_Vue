@@ -55,13 +55,12 @@ export default defineComponent({
     const routes = computed(() => {
       return permissionStore.routes
     })
+    console.log(routes)
     const showLogo = computed(() => {
       return settingsStore.showSidebarLogo
     })
 
     const menuActiveTextColor = computed(() => {
-      console.log(settingsStore.sidebarTextTheme)
-
       if (settingsStore.sidebarTextTheme) {
         return '#57CAEB'
       } else {

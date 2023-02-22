@@ -2,18 +2,18 @@
  app 布局入口
 -->
 <template>
-  <div class="app-wrapper">
+  <div class="app-wrapper" :class="classObj">
     <div v-if="classObj.mobile && sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
     <Sidebar class="sidebar-container" />
     <div :class="{ hasTagsView: showTagsView }" class="main-container">
       <div :class="{ 'fixed-header': fixedHeader }">
         <Navbar />
         <TagsView v-if="showTagsView" />
-      </div>
-      <AppMain />
-      <RightPanel v-if="showSettings">
-        <!-- <Settings /> -->
-      </RightPanel>
+    </div>
+    <AppMain />
+      <!-- <RightPanel v-if="showSettings">
+          <Settings />
+        </RightPanel> -->
     </div>
   </div>
 </template>

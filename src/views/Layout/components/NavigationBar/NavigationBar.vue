@@ -14,10 +14,10 @@
       </template>
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
-          <!-- <img
+          <img
                 :src="avatar + '?imageView2/1/w/80/h/80'"
                 class="user-avatar"
-              > -->
+              >
         </div>
         <template #dropdown>
           <el-dropdown-menu>
@@ -138,7 +138,7 @@ export default {
       display: inline-block;
       padding: 0 8px;
       height: 100%;
-      font-size: 18px;
+      font-size: 30px;
       color: #5a5e66;
       vertical-align: text-bottom;
 

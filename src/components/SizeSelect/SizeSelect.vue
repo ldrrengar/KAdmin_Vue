@@ -1,12 +1,12 @@
 <!-- 布局大小选择 -->
 <template>
   <div>
-    
-    <el-icon :size="22"><Menu /></el-icon>
+   
    <el-dropdown id="size-select" trigger="click" @command="handleSetSize">
       <!-- <svg class="icon" aria-hidden="true" font-size="25px">
         <use xlink:href="#icon-buju1" />
-      </svg> -->
+      </svg> --> 
+    <el-icon :size="22"><Menu /></el-icon>
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item v-for="item of sizeOptions" :key="item.value" :disabled="size === item.value"
@@ -65,4 +65,9 @@ export default defineComponent({
   }
 })
 </script>
-  
+<style lang="scss" scoped>
+.el-dropdown {
+  line-height: inherit;
+  font-size: 30px;
+}
+</style>
