@@ -5,8 +5,7 @@ import type { RouteRecordRaw } from 'vue-router';
 
 export const defaultRoutes: RouteRecordRaw[] = [
   {
-    path: '/',
-    name: 'redecit',
+    path: '/redecit',
     component: Layout,
     meta: { hidden: true },
     children: [
@@ -17,15 +16,18 @@ export const defaultRoutes: RouteRecordRaw[] = [
     ]
   },
   {
-    path: '/home',
+    path: '/',
     name: 'home',
     component: Layout,
+    redirect: '/home',
     children: [
       {
         path: 'home',
         component: () => import('@/views/Home/Home.vue'),
         name: 'home',
-        meta: { title: '首页' }
+        meta: { title: '首页',
+        icon: '#icondashboard',
+        affix: true }
       }
     ]
   },

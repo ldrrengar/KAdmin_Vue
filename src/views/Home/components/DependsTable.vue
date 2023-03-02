@@ -104,7 +104,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from 'vue'
-import { dependencies, devDependencies } from '../../../../../package.json'
+import { dependencies, devDependencies } from '../../../../package.json'
 export default defineComponent({
   setup() {
     const state = reactive({

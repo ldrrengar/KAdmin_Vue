@@ -3,7 +3,7 @@
     id="homeLineCharts"
     :class="className"
     :style="{height: height, width: width}"
-  />
+  ></div>
 </template>
 
 <script lang="ts">

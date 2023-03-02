@@ -8,7 +8,10 @@ export default defineConfig({
   server: {
     host: 'localhost',
     port: 8024,
-    open: true
+    open: true,
+    // hmr: {
+    //   overlay: false
+    // }
   },
   resolve: {
     alias: {

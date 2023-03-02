@@ -7,12 +7,7 @@
 -->
 <template>
   <div class="dashboard-editor-container">
-    <!-- <GithubCorner class="github-corner" /> -->
     <PanelGroup @handle-set-line-chart-data="handleSetLineChartData" />
-    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;border-radius: 8px;">
-      <LineChart :chart-data="lineChartData" />
-    </el-row>
-
     <el-row :gutter="32">
       <el-col
         :xs="24"
@@ -42,7 +37,6 @@
         </div>
       </el-col>
     </el-row>
-
     <el-row :gutter="8">
       <el-col
         :xs="{span: 24}"
@@ -54,39 +48,6 @@
       >
         <DependsTable style="border-radius: 8px;" />
       </el-col>
-      <el-col
-        :xs="{span: 24}"
-        :sm="{span: 24}"
-        :md="{span: 24}"
-        :lg="{span: 8}"
-        :xl="{span: 8}"
-        style="padding-right:8px;margin-bottom:30px;"
-      >
-        <TodoList style="border-radius: 8px;" />
-      </el-col>
-    </el-row>
-
-    <el-row>
-      <el-col
-        :xs="{span: 24}"
-        :sm="{span: 24}"
-        :md="{span: 24}"
-        :lg="{span: 16}"
-        :xl="{span: 16}"
-        style="padding-right:8px;margin-bottom:30px;"
-      >
-        <UpdateTimeline style="border-radius: 16px;" />
-      </el-col>
-      <el-col
-        :xs="{span: 24}"
-        :sm="{span: 24}"
-        :md="{span: 24}"
-        :lg="{span: 8}"
-        :xl="{span: 8}"
-        style="padding-right:8px;margin-bottom:30px;"
-      >
-        <BoxCard style="border-radius: 8px;" />
-      </el-col>
     </el-row>
   </div>
 </template>
@@ -95,12 +56,12 @@
 import { ref } from 'vue'
 // import GithubCorner from '@/components/github-corner/Index.vue'
 import PanelGroup from './components/PanelGroup.vue'
-import LineChart from './components/LineChart.vue'
+// import LineChart from './components/LineChart.vue'
 import RadarChart from './components/RadarChart.vue'
 import PieChart from './components/PieChart.vue'
 import BarChart from './components/BarChart.vue'
 import DependsTable from './components/DependsTable.vue'
-import TodoList from './components/todo-list/Index.vue'
+// import TodoList from './components/todo-list/Index.vue'
 import BoxCard from './components/BoxCard.vue'
 import UpdateTimeline from './components/UpdateTimeline.vue'
 const data = {
