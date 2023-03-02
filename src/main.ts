@@ -4,7 +4,6 @@ import 'element-plus/dist/index.css'
 // import '@/styles/index.scss'
 import App from './App.vue'
 import Router from './router/router'
-import { axiosPlugin } from './utils/axios'
 import { createPinia } from "pinia";
 // 图标
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
@@ -17,6 +16,5 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 app.use(Router)
     .use(ElementPlus)
-    .use(axiosPlugin)
     .use(pinia)
     .mount('#app')

@@ -1,9 +1,5 @@
 /*
- * @Description: 权限
- * @Author: ZY
- * @Date: 2020-12-28 09:12:46
- * @LastEditors: ZY
- * @LastEditTime: 2021-01-27 19:36:01
+ * 权限
  */
 
 import NProgress from 'nprogress'
@@ -26,7 +22,7 @@ router.beforeEach(async(to: RouteLocationNormalized, _: RouteLocationNormalized,
     } else {
       if (user().roles.length === 0) {
         try {
-          await store.dispatch(UserActionTypes.ACTION_GET_USER_INFO, undefined)
+          await user().getUserInfo()
           const roles = user().roles
           permission().setRoutes(roles)
           permission().dynamicRoutes.forEach((route) => {

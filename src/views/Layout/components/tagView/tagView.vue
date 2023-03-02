@@ -48,9 +48,7 @@ const toLastView = (visitedViews: TagView[], view: TagView) => {
       console.warn(err)
     })
   } else {
-    // Default redirect to the home page if there is no tags-view, adjust it if you want
     if (view.name === 'Dashboard') {
-      // to reload home page
       router.push({ path: '/redirect' + view.fullPath }).catch(err => {
         console.warn(err)
       })

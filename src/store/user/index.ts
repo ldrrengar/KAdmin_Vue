@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { loginRequest, userInfoRequest } from '@/apis/user'
 import { getToken } from '@/utils/cookies'
 
 export interface userState{
@@ -23,6 +24,19 @@ export const user = defineStore('user', {
         }
     },
     actions: {
+        async login(userInfo: { userName: string, passWord: string }){
+            let { userName, passWord } = userInfo
+            userName = userName.trim()
+            await loginRequest({ userName, passWord }).then(async(res) => {
+              if (res?.code === 0 && res.data.accessToken) {
+                this.setToken(res.data.accessToken)
+              }
+            }).catch((err) => {
+              console.log(err)
+            })
+            
+        },
+
         setToken(token: string) {
             this.token = token
         },
@@ -43,7 +57,7 @@ export const user = defineStore('user', {
             this.roles = roles
         },
 
-        setEmail(email: string) {
+        setEmail(email: string) :void {
             this.email = email
         },
         resetToken() :void{
@@ -51,19 +65,19 @@ export const user = defineStore('user', {
             this.roles = []
         },
         // 用户信息获取
-        getUserInfo():void{
-            // await userInfoRequest().then((res) => {
-            //     if (res?.code === 0) {
-            //       commit(UserMutationTypes.SET_ROLES, res.data.roles)
-            //       commit(UserMutationTypes.SET_NAME, res.data.name)
-            //       commit(UserMutationTypes.SET_AVATAR, res.data.avatar)
-            //       commit(UserMutationTypes.SET_INTRODUCTION, res.data.introduction)
-            //       commit(UserMutationTypes.SET_EMAIL, res.data.email)
-            //       return res
-            //     } else {
-            //       throw Error('Verification failed, please Login again.')
-            //     }
-            //   })
+        async getUserInfo(){
+            await userInfoRequest().then((res) => {
+                if (res?.code === 0) {
+                    this.setRoles(res.data.roles)
+                    this.setName(res.data.name)
+                    this.setAvatat(res.data.avatar)
+                    this.setIntroduction(res.data.introduction)
+                    this.setEmail(res.data.email)
+                  return res
+                } else {
+                  throw Error('身份验证失败，请重新登录')
+                }
+              })
         }
     }
 })

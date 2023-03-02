@@ -25,7 +25,7 @@ export const defaultRoutes: RouteRecordRaw[] = [
         path: 'home',
         component: () => import('@/views/Home/Home.vue'),
         name: 'home',
-        meta: { title: 'index' }
+        meta: { title: '首页' }
       }
     ]
   },
@@ -33,6 +33,53 @@ export const defaultRoutes: RouteRecordRaw[] = [
     path: '/login',
     name: 'login',
     component: Login
+  }, {
+    path: '/charts',
+    component: Layout,
+    redirect: 'noredirect',
+    name: 'Charts',
+    meta: {
+      title: 'charts',
+      icon: '#iconchart1'
+    },
+    children: [
+      {
+        path: 'bar-chart',
+        component: () =>
+          import(
+            /* webpackChunkName: "BarChart" */ '@/views/charts/BarChartDemo.vue'
+          ),
+        name: 'BarChartDemo',
+        meta: {
+          title: 'barChart',
+          noCache: true
+        }
+      },
+      {
+        path: 'line-chart',
+        component: () =>
+          import(
+            /* webpackChunkName: "LineChart" */ '@/views/charts/LineChartDemo.vue'
+          ),
+        name: 'LineChartDemo',
+        meta: {
+          title: 'lineChart',
+          noCache: true
+        }
+      },
+      {
+        path: 'mixed-chart',
+        component: () =>
+          import(
+            /* webpackChunkName: "MixedChat" */ '@/views/charts/MixedChatDemo.vue'
+          ),
+        name: 'MixedChartDemo',
+        meta: {
+          title: 'mixedChart',
+          noCache: true
+        }
+      }
+    ]
   }
 ]
 // createWebHistory 是history模式  createWebHashHistory是hash模式

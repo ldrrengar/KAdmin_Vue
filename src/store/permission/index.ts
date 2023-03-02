@@ -16,16 +16,17 @@ export const permission = defineStore('permission', {
         }
     },
     actions: {
-      setRoutes(routes: RouteRecordRaw[]) :void{
-        this.routes = defaultRoutes.concat(routes)
-        this.dynamicRoutes = routes
+      setRoutes(routeArr: string[]) :void{
+        let accessedRoutes = filterAsyncRoutes([], routeArr)
+        this.routes = defaultRoutes.concat(accessedRoutes)
+        this.dynamicRoutes = accessedRoutes
       }
     }
 })
 
 
 export const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]) => {
-    const res: RouteRecordRaw[] = []
+    let res: RouteRecordRaw[] = []
     routes.forEach(route => {
       const r = { ...route }
       if (hasPermission(roles, r)) {
@@ -38,7 +39,7 @@ export const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]) => 
     return res
   }
 
-  const hasPermission = (roles: string[], route: RouteRecordRaw) => {
+export const hasPermission = (roles: string[], route: RouteRecordRaw) => {
     if (route.meta && route.meta.roles) {
       return roles.some(role => {
         if (route.meta?.roles !== undefined) {

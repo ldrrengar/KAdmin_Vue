@@ -20,7 +20,7 @@
           </template>
         </el-input>
       </el-form-item>
-      <el-button type="primary" class="sub-btn" @click="handleLogin">登录</el-button>
+      <el-button type="primary" class="sub-btn" :loading="loading" @click="handleLogin">登录</el-button>
     </el-form>
   </div>
 </template>
@@ -28,6 +28,7 @@
 import { defineComponent, reactive, ref, onMounted, toRefs } from "vue";
 import { useRouter } from "vue-router";
 import { User, Lock } from '@element-plus/icons-vue'
+import {user} from "@/store/user"
 import { InitData } from '@/types/login'
 export default defineComponent({
   name: "login",
@@ -37,23 +38,16 @@ export default defineComponent({
   },
   setup() {
     const elForm = ref(null);
-    // const data = reactive({
-    //   form: {
-    //     userName: "admin",
-    //     passWord: "123456",
-    //     remember: false,
-    //   },
-    //   rules: {
-    //     userName: [{ required: true, trigger: "blur", message: "不能为空" }],
-    //     passWord: [{ required: true, trigger: "blur", message: "不能为空" }],
-    //   },
-    //   loading: false,
-    // });
     const data = reactive(new InitData())
     const rules = {
       userName: [{ required: true, trigger: "blur", message: "账号不能为空" }],
       passWord: [{ required: true, trigger: "blur", message: "密码不能为空" }],
     }
+    const state = reactive({
+      loading: false,
+      redirect: '',
+      otherQuery: {}
+    })
     onMounted(() => {
       console.log("onMounted--原mounted");
       console.log(data);
@@ -62,22 +56,37 @@ export default defineComponent({
     const router = useRouter()
     const handleLogin = () => {
       console.log(data)
-      data.loginFormRef?.validate((valid: boolean) => {
-                if (valid) {
-                    // login(data.loginForm).then(res => {
-                    //     sessionStorage.setItem('token', res.data.token)
-                    //     router.push('/')
-                    // })
-                    router.push('/home')
-                }
+      data.loginFormRef?.validate(async(valid: boolean) => {
+        if (valid) {
+          state.loading = true
+          const val = await user().login(data.loginForm)
+          console.log(val)
+          router
+            .push({
+              path: state.redirect || '/',
+              query: state.otherQuery
             })
-      
+            .catch(err => {
+              console.warn(err)
+            })
+          setTimeout(() => {
+            state.loading = false
+          }, 0.5 * 1000)
+        } else {
+          setTimeout(() => {
+            state.loading = false
+          }, 0.5 * 1000)
+          return false
+        }
+      })
+
     }
     return {
       // form: data.form,
       // rules: data.rules,
       ...toRefs(data),
       rules,
+      ...toRefs(state),
       handleLogin
     };
   },
