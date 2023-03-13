@@ -11,7 +11,14 @@ export default defineConfig({
     open: true,
     // hmr: {
     //   overlay: false
-    // }
+    // },
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:4523/m1/1348587-0-default',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      },
+    }
   },
   resolve: {
     alias: {

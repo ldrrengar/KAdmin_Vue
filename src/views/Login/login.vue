@@ -59,8 +59,7 @@ export default defineComponent({
       data.loginFormRef?.validate(async(valid: boolean) => {
         if (valid) {
           state.loading = true
-          const val = await user().login(data.loginForm)
-          console.log(val)
+          await user().login(data.loginForm)
           router
             .push({
               path: state.redirect || '/',

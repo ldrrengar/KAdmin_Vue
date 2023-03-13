@@ -64,7 +64,8 @@
 </template>
 
 <script lang="ts">
-import path from 'path'
+// import path from 'path'
+import path from 'path-browserify'
 import { computed, defineComponent, PropType } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
 import { isExternal } from '@/utils/validate'

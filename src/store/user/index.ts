@@ -28,9 +28,9 @@ export const user = defineStore('user', {
             let { userName, passWord } = userInfo
             userName = userName.trim()
             await loginRequest({ userName, passWord }).then(async(res) => {
-              if (res?.code === 0 && res.data.accessToken) {
+            //   if (res?.code === 0 && res.data.accessToken) {
                 this.setToken(res.data.accessToken)
-              }
+            //   }
             }).catch((err) => {
               console.log(err)
             })
@@ -67,16 +67,21 @@ export const user = defineStore('user', {
         // 用户信息获取
         async getUserInfo(){
             await userInfoRequest().then((res) => {
-                if (res?.code === 0) {
-                    this.setRoles(res.data.roles)
+                this.setRoles(res.data.roles)
                     this.setName(res.data.name)
                     this.setAvatat(res.data.avatar)
                     this.setIntroduction(res.data.introduction)
                     this.setEmail(res.data.email)
-                  return res
-                } else {
-                  throw Error('身份验证失败，请重新登录')
-                }
+                // if (res?.code === 0) {
+                //     this.setRoles(res.data.roles)
+                //     this.setName(res.data.name)
+                //     this.setAvatat(res.data.avatar)
+                //     this.setIntroduction(res.data.introduction)
+                //     this.setEmail(res.data.email)
+                //   return res
+                // } else {
+                //   throw Error('身份验证失败，请重新登录')
+                // }
               })
         }
     }

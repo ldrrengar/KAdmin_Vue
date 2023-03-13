@@ -5,6 +5,7 @@ import 'element-plus/dist/index.css'
 import App from './App.vue'
 import Router from './router/router'
 import { createPinia } from "pinia";
+import '@/permission'
 // 图标
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 

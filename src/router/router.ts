@@ -41,7 +41,7 @@ export const defaultRoutes: RouteRecordRaw[] = [
     redirect: 'noredirect',
     name: 'Charts',
     meta: {
-      title: 'charts',
+      title: '图表',
       icon: '#iconchart1'
     },
     children: [
@@ -53,7 +53,7 @@ export const defaultRoutes: RouteRecordRaw[] = [
           ),
         name: 'BarChartDemo',
         meta: {
-          title: 'barChart',
+          title: '柱状图',
           noCache: true
         }
       },
@@ -65,7 +65,7 @@ export const defaultRoutes: RouteRecordRaw[] = [
           ),
         name: 'LineChartDemo',
         meta: {
-          title: 'lineChart',
+          title: '线性图',
           noCache: true
         }
       },
@@ -77,7 +77,7 @@ export const defaultRoutes: RouteRecordRaw[] = [
           ),
         name: 'MixedChartDemo',
         meta: {
-          title: 'mixedChart',
+          title: '混合图表',
           noCache: true
         }
       }

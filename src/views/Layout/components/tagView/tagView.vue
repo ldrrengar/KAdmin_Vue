@@ -27,7 +27,8 @@
 </template>
 
 <script lang="ts" setup>
-import path from 'path'
+// import path from 'path'
+import path from 'path-browserify'
 import { tagsView, TagView } from '@/store/tagsview'
 import { permission } from '@/store/permission'
 import { computed, getCurrentInstance, nextTick, onBeforeMount, reactive, ref, toRefs, watch } from 'vue'
@@ -96,7 +97,6 @@ const state = reactive({
     }
     tagsStore.delOthersCachedViews(state.selectedTag as TagView)
     tagsStore.delOthersVisitedViews(state.selectedTag as TagView)
-    // store.dispatch(TagsActionTypes.ACTION_DEL_OTHER_VIEW, state.selectedTag as TagView)
   },
   closeAllTags: (view: TagView) => {
     tagsStore.delAllVisitedViews()
@@ -170,8 +170,6 @@ const initTags = () => {
 
 const addTags = () => {
   if (currentRoute.name) {
-    console.log(currentRoute.name, 'currentRoute.namecurrentRoute.namecurrentRoute.namecurrentRoute.namecurrentRoute.namecurrentRoute.namecurrentRoute.namecurrentRoute.name')
-    // store.dispatch(TagsActionTypes.ACTION_ADD_VIEW, currentRoute)
     tagsStore.addCachedView(currentRoute)
     tagsStore.addVisitedView(currentRoute)
   }
