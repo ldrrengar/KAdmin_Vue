@@ -37,14 +37,12 @@ const state = reactive({
       return item.meta && item.meta.title && item.meta.breadcrumb !== false;
     });
     
-console.log(state.breadcrumbs)
   },
   isDashboard(route: RouteLocationMatched) {
     const name = route && route.name;
     if (!name) {
       return false;
     }
-    console.log(name)
     return (
       name.toString().trim().toLocaleLowerCase() ===
       "Dashboard".toLocaleLowerCase()

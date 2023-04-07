@@ -138,7 +138,7 @@ export default defineComponent({
 
     const myCount = ref(null)
     onMounted(() => {
-      console.log((myCount.value as any).value)
+      // console.log((myCount.value as any).value)
     })
 
     return {

@@ -49,13 +49,13 @@ export default defineComponent({
       otherQuery: {}
     })
     onMounted(() => {
-      console.log("onMounted--原mounted");
-      console.log(data);
-      console.log(elForm);
+      // console.log("onMounted--原mounted");
+      // console.log(data);
+      // console.log(elForm);
     });
     const router = useRouter()
     const handleLogin = () => {
-      console.log(data)
+      // console.log(data)
       data.loginFormRef?.validate(async(valid: boolean) => {
         if (valid) {
           state.loading = true

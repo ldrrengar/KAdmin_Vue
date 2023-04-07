@@ -20,7 +20,6 @@ export const permission = defineStore('permission', {
         let accessedRoutes = filterAsyncRoutes([], routeArr)
         this.routes = defaultRoutes.concat(accessedRoutes)
         this.dynamicRoutes = defaultRoutes
-        console.log(this.dynamicRoutes)
       }
     }
 })

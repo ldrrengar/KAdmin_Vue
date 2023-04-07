@@ -6,7 +6,8 @@
         @click.middle="!state.isAffix(tag) ? state.closeSelectedTag(tag) : ''"
         @contextmenu.prevent="state.openMenu(tag, $event)">
         {{ tag.meta.title }}
-        <span v-if="!state.isAffix(tag)" class="el-icon-close" @click.prevent.stop="state.closeSelectedTag(tag)" />
+        <el-icon v-if="!state.isAffix(tag)" class="el-icon-close"  @click.prevent.stop="state.closeSelectedTag(tag)"><Close /></el-icon>
+        <!-- <span v-if="!state.isAffix(tag)" class="el-icon-close" @click.prevent.stop="state.closeSelectedTag(tag)" /> -->
       </router-link>
     </ScrollPane>
     <ul v-show="state.visible" :style="{ left: state.left + 'px', top: state.top + 'px' }" class="contextmenu">
@@ -216,13 +217,12 @@ onBeforeMount(() => {
 </script>
 
 <style lang="scss" scoped>
-// Reset element css of el-icon-close
 .tags-view-wrapper {
   .tags-view-item {
     .el-icon-close {
       width: 16px;
       height: 16px;
-      vertical-align: 2px;
+      vertical-align: -2px;
       border-radius: 50%;
       text-align: center;
       transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);

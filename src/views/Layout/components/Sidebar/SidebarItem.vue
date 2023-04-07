@@ -31,7 +31,7 @@
         </el-menu-item>
       </SidebarItemLink>
     </template>
-    <el-submenu
+    <el-sub-menu
       v-else
       :index="resolvePath(item.path)"
     >
@@ -59,7 +59,7 @@
           class="nest-menu"
         />
       </template>
-    </el-submenu>
+    </el-sub-menu>
   </div>
 </template>
 
@@ -158,7 +158,6 @@ export default defineComponent({
   .nest-menu .el-submenu > .el-submenu__title,
   .el-submenu .el-menu-item {
     min-width: $sideBarWidth !important;
-
     &:hover {
       background-color: $subMenuHover !important;
     }

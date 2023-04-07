@@ -14,7 +14,6 @@ import whiteList from './config/default/whitelist'
 NProgress.configure({ showSpinner: false })
 
 router.beforeEach(async(to: RouteLocationNormalized, _: RouteLocationNormalized, next: any) => {
-  console.log(user().token)
   NProgress.start()
   if (user().token) {
     if (to.path === '/login') {
@@ -26,7 +25,6 @@ router.beforeEach(async(to: RouteLocationNormalized, _: RouteLocationNormalized,
           await user().getUserInfo()
           const roles = user().roles
           permission().setRoutes(roles)
-          console.log(123)
           permission().dynamicRoutes.forEach((route) => {
             router.addRoute(route)
           })
@@ -52,7 +50,5 @@ router.beforeEach(async(to: RouteLocationNormalized, _: RouteLocationNormalized,
 })
 
 router.afterEach((to: RouteLocationNormalized) => {
-  console.log(to)
   NProgress.done()
-
 })

@@ -61,7 +61,7 @@ const moveToCurrentTag = (currentTag: HTMLElement) => {
   }
 };
 const emit = defineEmits<{ (e: "scroll"): void }>();
-console.log(emit)
+// console.log(emit)
 const emitScroll = () => {
   emit("scroll");
 };
