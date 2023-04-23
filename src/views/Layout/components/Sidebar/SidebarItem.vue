@@ -56,6 +56,7 @@
           :is-collapse="isCollapse"
           :is-first-level="false"
           :base-path="resolvePath(child.path)"
+          style="padding-left: 45px;"
           class="nest-menu"
         />
       </template>
@@ -158,6 +159,7 @@ export default defineComponent({
   .nest-menu .el-submenu > .el-submenu__title,
   .el-submenu .el-menu-item {
     min-width: $sideBarWidth !important;
+
     &:hover {
       background-color: $subMenuHover !important;
     }

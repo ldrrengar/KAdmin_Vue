@@ -1,9 +1,5 @@
-/*
- * @Description: echarts 自适应问题
- * @Author: ZY
- * @Date: 2021-01-14 15:11:11
- * @LastEditors: ZY
- * @LastEditTime: 2021-01-14 16:34:24
+/**
+ * 自适应问题
  */
 
 import { ref } from 'vue'

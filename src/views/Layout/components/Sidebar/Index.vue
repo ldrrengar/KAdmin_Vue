@@ -24,6 +24,7 @@
           :item="route"
           :base-path="route.path"
           :is-collapse="isCollapse"
+          :isFirstLevel="false"
         />
       </el-menu>
     </el-scrollbar>

@@ -1,10 +1,4 @@
-<!--
- * @Description: admin 权限主页
- * @Author: ZY
- * @Date: 2021-01-15 18:44:25
- * @LastEditors: SCY
- * @LastEditTime: 2021-04-02 09:40:07
--->
+<!--权限主页-->
 <template>
   <div class="dashboard-editor-container">
     <PanelGroup @handle-set-line-chart-data="handleSetLineChartData" />
