@@ -23,6 +23,7 @@ export const settings = defineStore('settings', {
         }
     },
     actions: {
+        // 改变设置
         changeSetting(payload: { key: string, value: any }) : void{
           const { key, value } = payload
           switch (key) {

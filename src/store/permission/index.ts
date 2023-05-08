@@ -16,6 +16,7 @@ export const permission = defineStore('permission', {
         }
     },
     actions: {
+      // 缓存菜单路由
       setRoutes(routeArr: string[]) :void{
         let accessedRoutes = filterAsyncRoutes([], routeArr)
         this.routes = defaultRoutes.concat(accessedRoutes)
