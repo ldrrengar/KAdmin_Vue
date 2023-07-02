@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { loginRequest, userInfoRequest } from '@/apis/user'
+import { loginRequest, userInfoRequest} from '@/apis/user'
 import { getToken, setToken, removeToken } from '@/utils/cookies'
 
 export interface userState{
@@ -28,9 +28,9 @@ export const user = defineStore('user', {
         async login(userInfo: { userName: string, passWord: string }){
             let { userName, passWord } = userInfo
             userName = userName.trim()
-            await loginRequest({ userName, passWord }).then(async(res) => {
-              if (res?.code === 0 && res.data.accessToken) {
-                this.setToken(res.data.accessToken)
+            await loginRequest({ userName, passWord }).then(async(res: any) => {
+              if (res?.code === 0 && res.data.token) {
+                this.setToken(res.data.token)
               }
             }).catch((err) => {
               console.log(err)
@@ -77,7 +77,7 @@ export const user = defineStore('user', {
 
         // 用户信息获取
         async getUserInfo(){
-            await userInfoRequest().then((res) => {
+            await userInfoRequest().then((res: any) => {
                 if (res?.code === 0) {
                     this.setRoles(res.data.roles)
                     this.setName(res.data.name)

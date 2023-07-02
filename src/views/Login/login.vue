@@ -28,7 +28,7 @@
 import { defineComponent, reactive, ref, onMounted, toRefs } from "vue";
 import { useRouter } from "vue-router";
 import { User, Lock } from '@element-plus/icons-vue'
-import {user} from "@/store/user"
+import { user } from "@/store/user"
 import { InitData } from '@/types/login'
 export default defineComponent({
   name: "login",
@@ -48,15 +48,10 @@ export default defineComponent({
       redirect: '',
       otherQuery: {}
     })
-    onMounted(() => {
-      // console.log("onMounted--原mounted");
-      // console.log(data);
-      // console.log(elForm);
-    });
     const router = useRouter()
     const handleLogin = () => {
       // console.log(data)
-      data.loginFormRef?.validate(async(valid: boolean) => {
+      data.loginFormRef?.validate(async (valid: boolean) => {
         if (valid) {
           state.loading = true
           await user().login(data.loginForm)
@@ -81,8 +76,6 @@ export default defineComponent({
 
     }
     return {
-      // form: data.form,
-      // rules: data.rules,
       ...toRefs(data),
       rules,
       ...toRefs(state),

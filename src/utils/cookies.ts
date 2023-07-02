@@ -4,8 +4,8 @@
 import Keys from '@/constant/key'
 import Cookies from 'js-cookie'
 
-const TokenKey: string = 'token'
-const RefreshTokenkey: string = 'refresh-token'
+const TokenKey: string = 'authorization'
+const RefreshTokenkey: string = 'refresh-authorization'
 
 export const getTokenKey = () => TokenKey
 

@@ -4,17 +4,23 @@
 import { RootObject } from '@/model/rootObject'
 import { UserInfoModel, Users } from '@/model/userModel'
 import https from '@/utils/https'
-import { LoginModel } from '@/views/login/model/loginModel'
-import { RequestParams, ContentType, Method } from 'axios-mapper'
+import { LoginModel } from '@/model/loginModel'
 
-export const loginRequest = (userInfo: RequestParams) => {
-  return https(false).request<RootObject<LoginModel>>('api/user/login', Method.POST, userInfo, ContentType.json)
+// 登录
+export const loginRequest = (userInfo: any) => {
+  return https.post<RootObject<LoginModel>>('api/admin/login', userInfo)
 }
 
+// 获取用户信息
 export const userInfoRequest = () => {
-  return https().request<RootObject<UserInfoModel>>('api/user/userInfo', Method.GET, undefined, ContentType.form)
+  return https.get<RootObject<UserInfoModel>>('api/admin/info')
+}
+
+// 登出
+export const loginOut = () => {
+  return https.post<RootObject<''>>('api/admin/logout')
 }
 
 export const getUsers = (user: any) => {
-  return https().request<RootObject<Users>>('api/user/getUsers', Method.GET, user, ContentType.form)
+  return https.get<RootObject<Users>>('api/user/getUsers', user)
 }

@@ -2,7 +2,7 @@
  * 拦截器配置文件
  */
 
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosError } from 'axios'
 import {
     getTokenKey,
     getRefreshTokenkey,
@@ -12,31 +12,37 @@ import {
     setRefreshToken,
     removeToken
 } from './cookies'
+import { ElMessage } from 'element-plus';
 
-export class Interceptors {
+/**
+ * 封装axios请求类
+ */
+export class axiosInterceports {
 
     instance: AxiosInstance;
 
-    constructor() {
-        this.instance = axios.create({
-            baseURL: "/api",
-            timeout: 10000,
-        });
+
+    /**
+     * @param axiosConfig - axios配置
+     */
+    constructor(axiosConfig: AxiosRequestConfig) {
+        this.instance = axios.create(axiosConfig);
+        this.setInterceptor();
     }
 
     // 初始化拦截器
-    init() {
+    setInterceptor() {
         // 请求接口拦截器
         this.instance.interceptors.request.use(
             (config: any) => {
                 // 判断一下是否有cookie 如果有的话则把cookie放入请求头中
                 if (getToken()) {
-                    config.headers[getTokenKey()] = getToken();
+                    config.headers[getTokenKey()] = 'Bearer ' + getToken();
                     config.headers[getRefreshTokenkey()] = getRefreshToken();
                 }
                 return config;
             },
-            (err) => {
+            (err: AxiosError) => {
                 console.error(err);
             }
         );
@@ -53,10 +59,19 @@ export class Interceptors {
                 if (res.code !== 0) {
                     if (res.code === -3) {
                         console.error("登录过期");
+                        //错误提示信息
+                        ElMessage({
+                            type: 'error',
+                            message: '登录过期'
+                        })
                         removeToken();
                     } else {
                         if (res.msg) {
                             console.error(res.msg);
+                            ElMessage({
+                                type: 'error',
+                                message: res.msg
+                            })
                         }
                     }
                     return Promise.resolve(res);
@@ -72,7 +87,7 @@ export class Interceptors {
                     return res;
                 }
             },
-            (error) => {
+            (error: AxiosError) => {
                 if (error.message === "Request failed with status code 500") {
                     console.error("系统错误，请检查API是否正常！");
                     return;
@@ -92,6 +107,7 @@ export class Interceptors {
             }
         );
     }
+
     // 返回一下
     getInterceptors() {
         return this.instance;

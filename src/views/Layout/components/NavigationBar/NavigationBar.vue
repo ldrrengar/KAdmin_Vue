@@ -14,10 +14,7 @@
       </template>
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
-          <img
-                :src="avatar + '?imageView2/1/w/80/h/80'"
-                class="user-avatar"
-              >
+          <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar">
         </div>
         <template #dropdown>
           <el-dropdown-menu>
@@ -52,6 +49,7 @@ import { computed, reactive, toRefs } from 'vue'
 import { app } from '@/store/app'
 import { user } from '@/store/user'
 import { useRoute, useRouter } from 'vue-router'
+import { loginOut } from '@/apis/user'
 export default {
   components: {
     BreadCrumb,
@@ -78,9 +76,13 @@ export default {
         appStore.toggleSidebar(false)
       },
       logout: () => {
-        userStore.resetToken()
-        router.push(`/login?redirect=${route.fullPath}`).catch(err => {
-          console.warn(err)
+        loginOut().then((res: any) => {
+          if (res?.code === 0) {
+            userStore.resetToken()
+            router.push(`/login?redirect=${route.fullPath}`).catch(err => {
+              console.warn(err)
+            })
+          }
         })
       }
     })
