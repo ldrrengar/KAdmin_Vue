@@ -1,47 +1,24 @@
 <template>
-  <div
-    v-if="!item.meta || !item.meta.hidden"
-    :class="[
-      isCollapse ? 'simple-mode' : 'full-mode',
-      {'first-level': isFirstLevel}
-    ]"
-  >
-    <template
-      v-if="!alwaysShowRootMenu && theOnlyOneChild && !theOnlyOneChild.children"
-    >
-      <SidebarItemLink
-        v-if="theOnlyOneChild.meta"
-        :to="resolvePath(theOnlyOneChild.path)"
-      >
-        <el-menu-item
-          :index="resolvePath(theOnlyOneChild.path)"
-          :class="{'submenu-title-noDropdown': isFirstLevel}"
-        >
-          <svg
-            v-if="theOnlyOneChild.meta.icon"
-            class="icon"
-            aria-hidden="true"
-            font-size="17px"
-          >
+  <!-- v-if="!item.meta || !item.meta.hidden" -->
+  <div :class="[
+    isCollapse ? 'simple-mode' : 'full-mode',
+    { 'first-level': isFirstLevel }
+  ]">
+    <template v-if="!alwaysShowRootMenu && theOnlyOneChild && !theOnlyOneChild.children">
+      <SidebarItemLink v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)">
+        <el-menu-item :index="resolvePath(theOnlyOneChild.path)" :class="{ 'submenu-title-noDropdown': isFirstLevel }">
+          <svg v-if="theOnlyOneChild.meta.icon" class="icon" aria-hidden="true" font-size="17px">
             <use :xlink:href="theOnlyOneChild.meta.icon" />
           </svg>
           <span v-if="theOnlyOneChild.meta.title">{{
-           theOnlyOneChild.meta.title
+            theOnlyOneChild.meta.title
           }}</span>
         </el-menu-item>
       </SidebarItemLink>
     </template>
-    <el-sub-menu
-      v-else
-      :index="resolvePath(item.path)"
-    >
+    <el-sub-menu v-else :index="resolvePath(item.path)">
       <template #title>
-        <svg
-          v-if="item.meta && item.meta.icon"
-          class="icon"
-          aria-hidden="true"
-          font-size="16px"
-        >
+        <svg v-if="item.meta && item.meta.icon" class="icon" aria-hidden="true" font-size="16px">
           <use :xlink:href="item.meta.icon" />
         </svg>
         <span v-if="item.meta && item.meta.title">{{
@@ -49,16 +26,8 @@
         }}</span>
       </template>
       <template v-if="item.children">
-        <sidebar-item
-          v-for="child in item.children"
-          :key="child.path"
-          :item="child"
-          :is-collapse="isCollapse"
-          :is-first-level="false"
-          :base-path="resolvePath(child.path)"
-          style="padding-left: 45px;"
-          class="nest-menu"
-        />
+        <sidebar-item v-for="child in item.children" :key="child.path" :item="child" :is-collapse="isCollapse"
+          :is-first-level="false" :base-path="resolvePath(child.path)"  class="nest-menu" />
       </template>
     </el-sub-menu>
   </div>
@@ -94,6 +63,8 @@ export default defineComponent({
     SidebarItemLink
   },
   setup(props) {
+
+    // 根目录是否是一直显示
     const alwaysShowRootMenu = computed(() => {
       if (props.item.meta && props.item.meta.alwaysShow) {
         return true
@@ -116,6 +87,7 @@ export default defineComponent({
       return 0
     })
 
+    // 当只有一个子菜单时只显示子菜单
     const theOnlyOneChild = computed(() => {
       if (showingChildNumber.value > 1) {
         return null
@@ -151,12 +123,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.el-submenu.is-active > .el-submenu__title {
+.el-submenu.is-active>.el-submenu__title {
   color: $subMenuActiveText !important;
 }
 
 .full-mode {
-  .nest-menu .el-submenu > .el-submenu__title,
+
+  .nest-menu .el-submenu>.el-submenu__title,
   .el-submenu .el-menu-item {
     min-width: $sideBarWidth !important;
 
@@ -164,22 +137,24 @@ export default defineComponent({
       background-color: $subMenuHover !important;
     }
   }
-  .el-menu-item{
-    &>span{
+
+  .el-menu-item {
+    &>span {
       display: inline-block;
       padding-left: 5px;
     }
   }
+
   .el-submenu {
     overflow: hidden;
 
-    & > .el-submenu__title {
+    &>.el-submenu__title {
       .el-submenu__icon-arrow {
         display: none;
       }
 
-      & > span {
-             padding-left: 5px;
+      &>span {
+        padding-left: 5px;
 
       }
     }
@@ -200,23 +175,21 @@ export default defineComponent({
     .el-submenu {
       overflow: hidden;
 
-      & > .el-submenu__title {
+      &>.el-submenu__title {
         padding: 0px !important;
 
         .el-submenu__icon-arrow {
           display: none;
         }
 
-        & > span {
+        &>span {
           visibility: hidden;
         }
       }
     }
   }
 }
-</style>
 
-<style lang="scss" scoped>
 svg {
   margin-right: 16px;
 }

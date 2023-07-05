@@ -27,7 +27,7 @@ export const defaultRoutes: RouteRecordRaw[] = [
         name: 'home',
         meta: {
           title: '首页',
-          icon: '#icondashboard',
+          icon: '#icon-yibiaopan',
           affix: true
         }
       }
@@ -37,14 +37,15 @@ export const defaultRoutes: RouteRecordRaw[] = [
     path: '/login',
     name: 'login',
     component: Login
-  }, {
+  },
+  {
     path: '/charts',
     component: Layout,
     redirect: 'noredirect',
     name: 'Charts',
     meta: {
       title: '图表',
-      icon: '#iconchart1'
+      icon: '#icon-chartcolumn'
     },
     children: [
       {
@@ -56,6 +57,7 @@ export const defaultRoutes: RouteRecordRaw[] = [
         name: 'BarChartDemo',
         meta: {
           title: '柱状图',
+          icon: '#icon-chartcolumn',
           noCache: true
         }
       },
@@ -68,6 +70,7 @@ export const defaultRoutes: RouteRecordRaw[] = [
         name: 'LineChartDemo',
         meta: {
           title: '线性图',
+          icon: '#icon-tubiao-zhexiantu',
           noCache: true
         }
       },
@@ -80,10 +83,43 @@ export const defaultRoutes: RouteRecordRaw[] = [
         name: 'MixedChartDemo',
         meta: {
           title: '混合图表',
+          icon: '#icon-chartmixed',
           noCache: true
         }
       }
     ]
+  }, 
+  {
+    path: '/system',
+    component: Layout,
+    redirect: 'noredirect',
+    meta: {
+      title: '系统管理',
+      icon: '#icon-xitongguanli1'
+    },
+    name: 'System',
+    children: [
+      {
+        path: 'dictManage',
+        component: () => import(/* webpackChunkName: "dict" */ '@/views/system/dict/dict.vue'),
+        name: 'dictManage',
+        meta: {
+          title: '字典管理',
+          icon: '#icon-dictionary',
+          noCache: true
+        }
+      },
+      {
+        path: 'personInfo',
+        component: () => import(/* webpackChunkName: "personInfo" */ '@/views/system/dict/dict.vue'),
+        name: 'personInfo',
+        meta: {
+          title: '个人信息',
+          icon: '#icon-gerenxinxi',
+          noCache: true
+        }
+      },
+    ],
   },
   {
     path: '/error',
@@ -91,7 +127,7 @@ export const defaultRoutes: RouteRecordRaw[] = [
     redirect: 'noredirect',
     meta: {
       title: '错误页面',
-      icon: '#icon404'
+      icon: '#icon-icon-test1'
     },
     children: [
       {
@@ -100,6 +136,7 @@ export const defaultRoutes: RouteRecordRaw[] = [
         name: '401',
         meta: {
           title: '401',
+          icon: '#icon-icon-test',
           noCache: true
         }
       },
@@ -109,11 +146,12 @@ export const defaultRoutes: RouteRecordRaw[] = [
         name: '404',
         meta: {
           title: '404',
+          icon: '#icon-40401',
           noCache: true
         }
       }
     ]
-  }
+  },
 ]
 // createWebHistory 是history模式  createWebHashHistory是hash模式
 const router = createRouter({

@@ -50,6 +50,7 @@ export class axiosInterceports {
         // 响应拦截器
         this.instance.interceptors.response.use(
             (response) => {
+                console.log(response)
                 const res = response.data;
                 if (!response.status.toString().startsWith("2") || res.code === -1) {
                     // 如果状态码不是2开头或者接口code返回-1 则是返回错误信息
@@ -93,14 +94,23 @@ export class axiosInterceports {
                     return;
                 }
                 let code = -110;
+                console.log(error.message)
+                console.log(error.config)
+                console.log(error.config.headers)
+                console.log(error.config.baseURL)
+                console.log(error.isAxiosError)
+                console.log(JSON.stringify(error))
+                if (error.message == 'Network Error'){
+                    removeToken();
+                }
                 if (error && error.response && error.response.status) {
                     code = error.response.status;
                     // 登陆过期
                     if (code === 401 || code === -3) {
                         removeToken();
                     }
-                } else {
-                    console.error(error.message);
+                }  else {
+                    console.error(error);
                 }
                 const err = { errCode: -110, errMsg: error.message || "Error" };
                 return Promise.resolve(err);
